@@ -35,6 +35,12 @@ export const MainPage = () => {
     // Modal 
     const [modalIsVisible, showModal] = useState(false)
 
+    const dispatch = useDispatch()
+    const userInfo = useSelector(state => state.user)
+    console.log('i ran')
+
+    
+
     return (
         <Drawer
             open={drawerIsOpen}

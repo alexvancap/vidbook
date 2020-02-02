@@ -4,10 +4,11 @@ import { View } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 import { Styles } from '../Styles'
 import history from '../components/history'
+import { HOST } from '../constants'
 
 
 const handleLogin = (setState, username, password) => {
-    fetch('http://localhost:3000/login', {
+    fetch(`http://${HOST}:3000/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

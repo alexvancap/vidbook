@@ -4,12 +4,15 @@ import {Styles} from '../../Styles'
 import {Link} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import history from '../history'
+import { HOST } from '../../constants'
 
 export const NavBar = () => {
     const dispatch = useDispatch()
 
     const handleLogout = () => {
-        fetch('http://localhost:3000/logout')
+        fetch(`http://${HOST}:3000/logout`, { 
+            credentials: 'include' 
+        })
         .then(() => {
             history.push('/login')
             dispatch({type: 'SAVE_USER_ID', id: null})
@@ -53,7 +56,7 @@ export const NavBar = () => {
                 to={'#'}
                 onClick={() => handleLogout()}>
                 <Text
-                    style={Styles.navButton}>
+                    style={Styles.logoutButton}>
                         Logout
                 </Text>
             </View>

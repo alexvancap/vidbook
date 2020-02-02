@@ -56,6 +56,11 @@ const reducer = (currentState, action) => {
                     repeatedPasswordError: 'true'
                 }
             }
+        case 'SAVE_USER_INFO':
+            return{
+                ...currentState,
+                user: action.info
+            }
         break ;
     }
     return currentState
@@ -64,7 +69,7 @@ const reducer = (currentState, action) => {
 const initialState = {
     user: {
         id: null,
-        username: '',
+        username: null,
         firstName: '',
         lastName: '',
         adress: '',

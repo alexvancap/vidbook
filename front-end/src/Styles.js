@@ -24,13 +24,10 @@ export const Styles = StyleSheet.create({
         flex: 1
     },
     logoutButton: {
-        position: 'absolute',
         textAlign: "center",
         padding: 20,
         color: 'white',
         width: '100%',
-        alignSelf: 'flex-end',
-        right: 0
     },
     navButtonClicked: {
         lineHeight: 60,
@@ -95,5 +92,60 @@ export const Styles = StyleSheet.create({
         bottom: 0,
         backgroundColor: '#00367F', 
         flexDirection: 'row',
+    },
+    containerWeb: {
+        backgroundColor: 'rgba(206, 206, 206, 0.42)',
+        height: '100%',
+        minWidth: '960px',
+        maxWidth: '960px',
+        alignItems: 'center'
+    },
+    containerMobile: {
+        backgroundColor: 'rgba(206, 206, 206, 0.42)',
+        height: '100%',
+        width: '100%'
+    },
+    picContainerWeb: {
+        // position: 'absolute',
+        backgroundColor: '#264C7F',
+        flex: 1,
+        width: '100%',
+        maxHeight: '30%',
+        alignItems: 'center',
+        justifyContent: 'center'
+        // height: '100%'
+    },
+    picContainerMobile: {
+        backgroundColor: '#264C7F',
+        flex: 1,
+        maxHeight: '25%',
+        alignItems: 'center',
+        justifyContent: 'center'
+        
+    },
+    profilePicContainerWeb: {
+        backgroundColor: '#0056CC',
+        height: '250px',
+        width: '250px',
+        borderRadius: 150,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    profilePicContainerMobile: {
+        backgroundColor: '#0056CC',
+        height: 190,
+        width: 190,
+        borderRadius: 100,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    addHeaderImgButton: {
+        position: 'absolute',
+        right: '1%',
+        bottom: '3%',
+        backgroundColor: '#0056CC'
+    },
+    addProfileImgButton: {
+        backgroundColor: '#264C7F',
     }
 });
