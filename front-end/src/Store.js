@@ -39,10 +39,10 @@ const reducer = (currentState, action) => {
                 }
             }
         case 'SAVE_USER_ID':
-            console.log(action.id)
             return{
                 ...currentState,
                 user: {
+                    ...currentState.user,
                     id: action.id
                 }
             }
@@ -59,7 +59,22 @@ const reducer = (currentState, action) => {
         case 'SAVE_USER_INFO':
             return{
                 ...currentState,
-                user: action.info
+                user: {
+                    ...currentState.user,
+                    ...action.info
+                }
+            }
+        case 'UPLOAD_IMAGE': 
+            return {
+                ...currentState,
+                user: {
+                    ...currentState.user,
+                    images: {
+                        ...currentState.user.images,
+                        [action.imageType]: action.image
+                    }
+                    
+                }
             }
         break ;
     }
@@ -73,7 +88,11 @@ const initialState = {
         firstName: '',
         lastName: '',
         adress: '',
-        email: ''
+        email: '',
+        images: {
+            header: null,
+            profile: null
+        },
     },
     login: {
         username: '',

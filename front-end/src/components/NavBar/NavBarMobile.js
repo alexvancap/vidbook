@@ -6,6 +6,7 @@ import { Styles } from '../../Styles'
 import { Profile } from './../profile/Profile'
 import { Area } from '../'
 import history from '../history'
+import { ImagePickerr } from './../ImagePickerr'
 
 export const NavBarMobile = () => {
     return (
@@ -14,7 +15,7 @@ export const NavBarMobile = () => {
                 icon="home"
                 color={Colors.white}
                 size={45}
-                onPress={() => history.push('/')}
+                onPress={() => history.push('/picker')}
             />
             <IconButton 
                 icon="account"

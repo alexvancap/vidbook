@@ -1,5 +1,4 @@
 export const checkIfLoggedIn = (userInfo, dispatch) => {
-    console.log('waddup')
     if(!userInfo.id){
         fetch('http://localhost:3000/get-user', {
             credentials: 'include'

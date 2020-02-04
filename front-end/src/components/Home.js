@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 
 export const Home = (props) => {
     const history = useHistory()
-    console.log(history)
+    (history)
     return (
       <Text>home</Text>
       

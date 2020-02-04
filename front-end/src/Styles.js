@@ -93,51 +93,66 @@ export const Styles = StyleSheet.create({
         backgroundColor: '#00367F', 
         flexDirection: 'row',
     },
-    containerWeb: {
+    profileContainerWeb: {
         backgroundColor: 'rgba(206, 206, 206, 0.42)',
         height: '100%',
         minWidth: '960px',
         maxWidth: '960px',
-        alignItems: 'center'
     },
-    containerMobile: {
+    profileContainerMobile: {
         backgroundColor: 'rgba(206, 206, 206, 0.42)',
         height: '100%',
-        width: '100%'
+        width: '100%',
     },
+    profileHeaderContainerWeb: {
+        alignItems: 'center',
+        flexDirection: 'row',
+        height: '30%',
+        justifyContent: 'center'
+    },
+    profileHeaderContainerMobile: {
+        alignItems: 'center',
+        flexDirection: 'row',
+        
+        height: '25%',
+        justifyContent: 'center'
+    },
+
+
     picContainerWeb: {
         // position: 'absolute',
-        backgroundColor: '#264C7F',
         flex: 1,
         width: '100%',
-        maxHeight: '30%',
-        alignItems: 'center',
-        justifyContent: 'center'
+        height: '100%',
+        backgroundColor: '#264C7F',
         // height: '100%'
     },
     picContainerMobile: {
-        backgroundColor: '#264C7F',
         flex: 1,
-        maxHeight: '25%',
-        alignItems: 'center',
-        justifyContent: 'center'
-        
+        width: '100%',
+        height: '100%',
+        backgroundColor: '#264C7F',
     },
     profilePicContainerWeb: {
+        position: 'absolute',
         backgroundColor: '#0056CC',
-        height: '250px',
-        width: '250px',
-        borderRadius: 150,
+        height: '90%',
+        width: '20%',
+        borderRadius: 250,
+        alignSelf: 'center',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginTop: 'auto'
     },
     profilePicContainerMobile: {
+        position: "absolute",
         backgroundColor: '#0056CC',
-        height: 190,
-        width: 190,
+        height: '70%',
+        width: '40%',
         borderRadius: 100,
         alignItems: 'center',
-        justifyContent: 'center'
+        alignSelf: 'center',
+        justifyContent: 'center',
     },
     addHeaderImgButton: {
         position: 'absolute',
@@ -147,5 +162,35 @@ export const Styles = StyleSheet.create({
     },
     addProfileImgButton: {
         backgroundColor: '#264C7F',
+    },
+    profileInfo: {
+        backgroundColor: 'red',
+        height: 200,
+        width: '100%',
+        marginTop: 10,
+        backgroundColor: '#264C7F',
+        borderRadius: 10
+    },
+    profileInfoHeader: {
+        fontSize: 24,
+        color: 'white',
+        fontWeight: 'bold',
+        alignSelf: 'center',
+        marginTop: '2%'
+    },
+    editInfoButton: {
+        position: 'absolute',
+        bottom: 5,
+        right: 5,
+        width: 70,
+    },
+    profileInfoTextTitle: {
+        color: 'white',
+        fontSize: 16,
+        marginLeft: 5
+    },
+    profileInfoTextBlock: {
+        color: 'white',
+        marginLeft: 10
     }
 });

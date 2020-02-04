@@ -12,11 +12,32 @@ import { Register } from './Login/Register'
 import history from './components/history'
 import { Profile } from './components/profile/Profile'
 import { Styles } from './Styles'
+import  ImagePickerr from './components/ImagePickerr'
+import { HOST } from './constants'
 
 
 
 const App = () => {
-    console.log('noooooooooo')
+
+
+    const dispatch = useDispatch()
+    const userInfo = useSelector(state => state.user)
+    useEffect(() => {
+        if(userInfo.id === null){
+            fetch(`http://${HOST}:3000/get-user-info`, {
+                credentials: 'include'
+            }).then(res => res.json())
+            .then(res => {
+                if (res){
+                    console.log(res)
+                    dispatch({type: 'SAVE_USER_INFO', info: res})
+                }else{
+                    console.log('not logged in ')
+                }
+                console.log('???')
+            })
+        }
+    }, [])
 
     return (
         <StyleProvider>
@@ -24,6 +45,7 @@ const App = () => {
                 {Platform.OS === 'web'
                     ? <NavBar /> 
                     : null}
+                    <Route path='/picker' component={ImagePickerr} />
                     <Route exact path="/example" component={MainPage} />
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/register" component={Register} />

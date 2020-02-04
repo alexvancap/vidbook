@@ -37,7 +37,6 @@ export const MainPage = () => {
 
     const dispatch = useDispatch()
     const userInfo = useSelector(state => state.user)
-    console.log('i ran')
 
     
 
