@@ -1,12 +1,8 @@
 import React from 'react'
-import { View, Text } from 'react-native'
-import { IconButton, Colors} from 'react-native-paper'
-import { Button } from './../'
-import { Styles } from '../../Styles'
-import { Profile } from './../profile/Profile'
+import { Colors, IconButton } from 'react-native-paper'
 import { Area } from '../'
+import { Styles } from '../../Styles'
 import history from '../history'
-import { ImagePickerr } from './../ImagePickerr'
 
 export const NavBarMobile = () => {
     return (
@@ -15,7 +11,7 @@ export const NavBarMobile = () => {
                 icon="home"
                 color={Colors.white}
                 size={45}
-                onPress={() => history.push('/picker')}
+                onPress={() => history.push('/')}
             />
             <IconButton 
                 icon="account"
@@ -33,7 +29,7 @@ export const NavBarMobile = () => {
                 icon="magnify"
                 color={Colors.white}
                 size={45}
-                onPress={() => history.push('/login')}
+                onPress={() => history.push('/search')}
             />
         </Area>
     )

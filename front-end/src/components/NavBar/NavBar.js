@@ -2,7 +2,7 @@ import React from 'react'
 import {View, Text} from 'react-native'
 import {Styles} from '../../Styles'
 import {Link} from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import history from '../history'
 import { HOST } from '../../constants'
 
@@ -54,7 +54,7 @@ export const NavBar = () => {
             </Link>
             <View
                 to={'#'}
-                onClick={() => handleLogout()}>
+                onClick={handleLogout}>
                 <Text
                     style={Styles.logoutButton}>
                         Logout

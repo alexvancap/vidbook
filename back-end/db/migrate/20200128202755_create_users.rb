@@ -9,8 +9,9 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string(:email)
       t.string(:introduction)
       t.string(:current_role)
-      t.string(:high_school)
+      t.string(:school)
       t.string(:degree)
+      t.string(:skills)
     end
   end
 end

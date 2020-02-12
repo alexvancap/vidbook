@@ -69,12 +69,81 @@ const reducer = (currentState, action) => {
                 ...currentState,
                 user: {
                     ...currentState.user,
-                    images: {
-                        ...currentState.user.images,
-                        [action.imageType]: action.image
-                    }
-                    
+                    [action.imageType]: action.image
                 }
+            }
+        case 'HANDLE_PROFILE_CHANGE':
+            return {
+                ...currentState,
+                user: {
+                    ...currentState.user,
+                    [action.stateName]: action.input
+                }
+            }
+        case 'UPLOAD_VIDEO':
+            return {
+                ...currentState,
+                user: {
+                    ...currentState.user,
+                    video_url: action.video
+                }
+            }
+        case 'HANDLE_REGISTER_CHANGE':
+            return {
+                ...currentState,
+                register: {
+                    ...currentState.register,
+                    [action.stateName]: action.input
+                }
+            }
+        case 'STORE_ALL_USERS':
+            return{
+                ...currentState,
+                users: action.users
+            }
+        case 'ADD_COMMENT':
+            const focus_user = currentState.users.filter(user=>user.id === action.userId)[0]
+            return {
+                ...currentState,
+                users: [
+                    ...currentState.users.filter(user=>user.id !== action.userId),
+                    {...focus_user, video_comments: [
+                        ...focus_user.video_comments, {
+                            comment: action.content, 
+                            user_id: action.userId,
+                            user_that_commented_id: action.userThatCommentedId
+                        }
+                    ]}
+                ]
+            }
+        case 'UPDATE_SEARCH_INPUT': 
+            return{
+                ...currentState,
+                search: {
+                    ...currentState.search,
+                    input: action.input
+                }
+            }
+        case 'UPDATE_SEARCH_FILTER': 
+            return{
+                ...currentState,
+                search: {
+                    ...currentState.search,
+                    filter: action.filter
+                }
+            }
+        case 'ADD_FILTERED_USERS':
+            return{
+                ...currentState,
+                search: {
+                    ...currentState.search,
+                    searchedUsers: action.users
+                }
+            }
+        case 'SAVE_VIEWING_USER':
+            return{
+                ...currentState,
+                viewingUser: action.info
             }
         break ;
     }
@@ -82,13 +151,19 @@ const reducer = (currentState, action) => {
 }
 
 const initialState = {
+    users: [],
     user: {
         id: null,
         username: null,
-        firstName: '',
-        lastName: '',
+        first_name: '',
+        last_name: '',
         adress: '',
         email: '',
+        introduction: '',
+        school: '',
+        skills: '',
+        current_role: '',
+        degree: '',
         images: {
             header: null,
             profile: null
@@ -106,10 +181,39 @@ const initialState = {
         email: '',
         password: '',
         repeatedPassword: '',
-        repeatedPasswordError: false
+        repeatedPasswordError: ''
     },
     navBar: {
         clicked: null
+    },
+    editProfile: {
+        introduction: '',
+        current_role: '',
+        degree: '',
+        skills: '',
+        school: ''
+    },
+    search: {
+        input: '',
+        filter: 'name',
+        searchedUsers: []
+    },
+    viewingUser: {
+        id: null,
+        username: null,
+        first_name: '',
+        last_name: '',
+        adress: '',
+        email: '',
+        introduction: '',
+        school: '',
+        skills: '',
+        current_role: '',
+        degree: '',
+        images: {
+            header: null,
+            profile: null
+        },
     }
 }
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_04_214615) do
+ActiveRecord::Schema.define(version: 2020_01_28_222023) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -48,11 +48,6 @@ ActiveRecord::Schema.define(version: 2020_02_04_214615) do
     t.string "content"
   end
 
-  create_table "skills", force: :cascade do |t|
-    t.integer "user_id"
-    t.string "type"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
@@ -60,16 +55,22 @@ ActiveRecord::Schema.define(version: 2020_02_04_214615) do
     t.string "first_name"
     t.string "last_name"
     t.string "email"
+    t.string "introduction"
+    t.string "current_role"
+    t.string "school"
+    t.string "degree"
+    t.string "skills"
   end
 
   create_table "video_comments", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "video_id"
+    t.integer "user_that_commented_id"
+    t.string "comment"
   end
 
   create_table "video_likes", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "video_id"
+    t.integer "liked_user_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
