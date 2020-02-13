@@ -2,12 +2,15 @@ import React, {useState, useEffect} from 'react'
 import { View, Text, Button, Divider } from './../'
 import { ScrollView, Platform, Image, TouchableHighlight } from 'react-native'
 import { Styles } from './../../Styles'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { HOST } from './../../constants'
 import { CommentModal } from './CommentModal'
 import history from './../history'
+import { VideoComponent } from '../VideoComponent'
 
 export const HomeCard = (props) => {
+
+
 
     const [isLiked, setIsLiked] = useState(false)
     const [amountOfLikes, setAmountOfLikes] = useState(props.user.video_likes.length)
@@ -30,15 +33,21 @@ export const HomeCard = (props) => {
         })
         return counter === 1 ? `${counter} comment` : `${counter} comments`
     }
-    const calculateSpaceForComments = () => {
+    const calculateSpace = () => {
         const amountOfComments = parseInt(calculateComments())
 
         if (amountOfComments === 1){
-            return {...Styles.homeProfileCardMobile, marginBottom: 80}
+            return !props.user.video_url 
+                ? {...Styles.homeProfileCardMobile, marginBottom: 80}
+                : {...Styles.homeProfileCardMobile, marginBottom: 80,paddingBottom: 115}
         } else if (amountOfComments >= 2){
-            return {...Styles.homeProfileCardMobile, marginBottom: 135}
+            return !props.user.video_url 
+            ? {...Styles.homeProfileCardMobile, marginBottom: 135}
+            : {...Styles.homeProfileCardMobile, marginBottom: 135,paddingBottom: 115}
         } else {
-            return {...Styles.homeProfileCardMobile}
+            return !props.user.video_url 
+            ? {...Styles.homeProfileCardMobile}
+            : {...Styles.homeProfileCardMobile, paddingBottom: 115}
         }
     }
 
@@ -81,7 +90,7 @@ export const HomeCard = (props) => {
         <View style={
             Platform.OS === 'web' 
             ? Styles.homeProfileCard 
-            : calculateSpaceForComments() 
+            : calculateSpace() 
         }>
             <View style={Platform.OS === 'web' ? Styles.homeCardHeaderContainer : Styles.homeCardHeaderContainerMobile}>
                     {props.user.profile_url === "" 
@@ -95,36 +104,40 @@ export const HomeCard = (props) => {
                 
             </View>
             <Divider style={{height: 1.3}}/>
-            <View style={Platform.OS === 'web' ? Styles.homeCardVideoContainer : Styles.homeCardVideoContainerMobile}>
-
+            <View style={{ minHeight: 200}}>
+                {
+                    !props.user.video_url
+                    ?   <View style={Platform.OS === 'web' ? Styles.homeCardVideoContainer : Styles.homeCardVideoContainerMobile} />
+                    :   <VideoComponent videoUrl={props.user.video_url}/>
+                }
             </View>
             <View style={Platform.OS === 'web' ? Styles.homeCardBottom : Styles.homeCardBottomMobile}>
                 <Text style={Styles.homeCardBottomLikes}>{calculateLikes()}</Text>
                 <Text style={Styles.homeCardBottomComments}>{calculateComments()}</Text>
                 <View style={Styles.homeCardBottomButtons}>
-                    <Button onPress={() => handleLike()}>{isLiked ? 'unlike' : 'like'}</Button> 
+                    <Button onPress={() =>  handleLike()}>{isLiked ? 'unlike' : 'like'}</Button> 
                     <Button onPress={() =>  showModal(true)}>Comment</Button>
                 </View>
                 <CommentModal user={props.user} modalIsVisible={modalIsVisible} showModal={showModal}/>
             </View>
-                <View style={Platform.OS === 'web' ? Styles.homeCardComments : Styles.homeCardCommentsMobile}>
-                    <ScrollView>
-                        {props.user.video_comments.map(comment => (
-                            <View key={comment.id} style={Styles.homeCardSingleCommentContainer}>
-                                {props.user.profile_url === ""
-                                    ?   <View style={Styles.homeCommentsPicture} />
-                                    :   <Image source={{uri: props.user.profile_url}} style={Styles.homeCommentsPicture} />
-                                }
-                                <View style={Styles.homeSingleComment}>
-                                    <Text style={{marginLeft: 5}}>
-                                        {`${props.user.first_name ?  props.user.first_name : props.user.username} ${props.user.last_name ? props.user.last_name : ''}`}
-                                    </Text>
-                                    <Text style={{maxWidth: '95%', marginLeft: 10, marginRight: 10}}>{comment.comment}</Text>
-                                </View>
+            <View style={Platform.OS === 'web' ? Styles.homeCardComments : Styles.homeCardCommentsMobile}>
+                <ScrollView>
+                    {props.user.video_comments.map(comment => (
+                        <View key={comment.id} style={Styles.homeCardSingleCommentContainer}>
+                            {props.user.profile_url === ""
+                                ?   <View style={Styles.homeCommentsPicture} />
+                                :   <Image source={{uri: props.user.profile_url}} style={Styles.homeCommentsPicture} />
+                            }
+                            <View style={Styles.homeSingleComment}>
+                                <Text style={{marginLeft: 5}}>
+                                    {`${props.user.first_name ?  props.user.first_name : props.user.username} ${props.user.last_name ? props.user.last_name : ''}`}
+                                </Text>
+                                <Text style={{maxWidth: '95%', marginLeft: 10, marginRight: 10}}>{comment.comment}</Text>
                             </View>
-                        ))}
-                    </ScrollView>
-                </View>
+                        </View>
+                    ))}
+                </ScrollView>
+            </View>
         </View>
     )
 }

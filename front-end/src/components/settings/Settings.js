@@ -35,21 +35,20 @@ export const Settings = () => {
         }
     }
     const handleSubmit = () => {
-        if (!userInfo.id){
-            fetch(`http://${HOST}:3000/update-info`, {
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    username: information.username,
-                    email: information.email,
-                    address: information.address,
-                    password: passwords.password
-                })
+        console.log(information)
+        fetch(`http://${HOST}:3000/update-info`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: information.username,
+                email: information.email,
+                address: information.address,
+                password: passwords.password
             })
-        }
+        })
     }
 
         return (

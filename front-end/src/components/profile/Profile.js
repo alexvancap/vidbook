@@ -16,6 +16,10 @@ export const Profile = () => {
     const userInfo = useSelector(state => state.user)
     const dispatch = useDispatch()
 
+    const handleShowModal = () => {
+        showModal(false)
+    }
+
 
     useEffect(() => {
         if (!userInfo.id){
@@ -63,7 +67,7 @@ export const Profile = () => {
                             </View>
                         </View>
                         <Button style={Styles.editInfoButton} color='white' onPress={() => showModal(true)} mode="outlined">Edit</Button>
-                        <EditInfoModal showModal={showModal} modalIsVisible={modalIsVisible}/>
+                        <EditInfoModal showModal={handleShowModal} modalIsVisible={modalIsVisible}/>
                     </View>
                     <VideoContainer user={userInfo.id}/>
                 </View>

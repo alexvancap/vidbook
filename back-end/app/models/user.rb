@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
     def profile_url
         begin
             url_for(self.profile_pic)
+
         rescue => error
             ""
         end

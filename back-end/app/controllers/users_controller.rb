@@ -56,10 +56,8 @@ class UsersController < ApplicationController
     end
 
     def get_user
-        User.find(session[:user_id])
         user = User.find(session[:user_id])
-
-        img_url = url_for(user.profile_pic)
+        # img_url = url_for(user.profile_pic)
         if user
             render json: user.to_json(methods: [:profile_url, :header_url, :video_url])
         else
@@ -90,42 +88,23 @@ class UsersController < ApplicationController
 
         user = User.find(params[:id])
 
-        decoded_image = Base64.decode64(params[:img])
-        imageIO = StringIO.new(decoded_image) 
-
-        filename = params[:id] + '-' + params[:type] + '.jpg'
-
         if params[:type] === 'profile_url'
-            if user.profile_pic.attached?
-                user.profile_pic.purge
-            end
-            img = user.profile_pic.attach(io: imageIO, filename: filename)
+            user.update({ profile_pic: params[:photo] })
             img_url = url_for(user.profile_pic)
             render :json => {url: img_url}
 
         elsif params[:type] === 'header_url'
-            if user.header_pic.attached?
-                user.header_pic.purge
-            end
-            img = user.header_pic.attach(io: imageIO, filename: filename)
-            img_url = url_for(user.profile_pic)
+            user.update({ header_pic: params[:photo] })
+            img_url = url_for(user.header_pic)
             render :json => {url: img_url}
         end
-
     end
 
     def upload_video
         user = User.find(params[:id])
 
-        decoded_video = Base64.decode64(params[:video])
-        videoIO = StringIO.new(decoded_video) 
-        
-        filename = params[:id] + '-' + 'video' + '.mov'
+        user.update({ profile_video: params[:video] })
 
-        if user.profile_video.attached?
-            user.profile_video.purge
-        end
-        user.profile_video.attach(io: videoIO, filename: filename)
         render json: user.to_json({methods: [:video_url]})
 
     end

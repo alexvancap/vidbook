@@ -2,9 +2,9 @@
   "devToolsPort": 19002,
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 73576,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "packagerPid": 87650,
+  "expoServerNgrokUrl": "https://jr-bji.alexvancap.front-end.exp.direct",
+  "packagerNgrokUrl": "https://packager.jr-bji.alexvancap.front-end.exp.direct",
+  "ngrokPid": 87661,
   "webpackServerPort": 19006
 }

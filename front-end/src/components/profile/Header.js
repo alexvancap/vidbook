@@ -39,20 +39,30 @@ export const Header = () => {
                 exif: true
             });
 
-            dispatch({type: 'UPLOAD_IMAGE', image: result.uri, imageType: imageToAdd})
-
             if (!result.cancelled) {
+                // ImagePicker saves the taken photo to disk and returns a local URI to it
+                let localUri = result.uri;
+                let filename = localUri.split('/').pop();
+
+                // Infer the type of the image
+                let match = /\.(\w+)$/.exec(filename);
+                let type = match ? `image/${match[1]}` : `image`;
+
+                // Upload the image using the fetch and FormData APIs
+                let formData = new FormData();
+                // Assume "photo" is the name of the form field the server expects
+                formData.append('photo', { uri: localUri, name: filename, type });
+                formData.append('type', imageToAdd)
                 fetch(`http://${HOST}:3000/upload-img/${user.id}`, {
                     method: 'POST',
                     credentials: 'include',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'multipart/form-data',
                     },
-                    body: JSON.stringify({
-                        img: result.base64,
-                        type: imageToAdd
-                    })
+                    body: formData
                 })
+                .then(res => res.json())
+                .then(res => dispatch({type: 'UPLOAD_IMAGE', image: res.url, imageType: imageToAdd}))
             }
         };
 

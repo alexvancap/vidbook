@@ -1,23 +1,19 @@
-import React, {useEffect} from 'react'
-import { IconButton } from 'react-native-paper'
-import { View } from '../'
-import { Styles } from './../../Styles'
-import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
+import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
-import { HOST } from './../../constants'
+import React, { useEffect } from 'react';
+import { IconButton } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
-import { Audio, Video } from 'expo-av';
-import { Image } from 'react-native'
+import { View } from '../';
+import { HOST } from './../../constants';
+import { Styles } from './../../Styles';
+import { VideoComponent } from '../VideoComponent'
 
 
 export const VideoContainer = (props) => {
 
     const dispatch = useDispatch()
     const videoUrl = useSelector(state => state.user.video_url)
-    console.log(videoUrl)
-
-
 
     useEffect(() => {
         getPermissionAsync();
@@ -38,48 +34,62 @@ export const VideoContainer = (props) => {
                 allowsEditing: true,
                 aspect: [4, 3],
                 quality: 1,
-                base64: true
+                // base64: true
             });
-    
+
             if (!result.cancelled) {
+                // ImagePicker saves the taken photo to disk and returns a local URI to it
+                let localUri = result.uri;
+                let filename = localUri.split('/').pop();
+
+                // Infer the type of the image
+                let match = /\.(\w+)$/.exec(filename);
+                let type = match ? `image/${match[1]}` : `image`;
+
+                // Upload the image using the fetch and FormData APIs
+                let formData = new FormData();
+                // Assume "photo" is the name of the form field the server expects
+                formData.append('video', { uri: localUri, name: filename, type });
                 
                 fetch(`http://${HOST}:3000/upload-video/${props.user}`, {
                     method: 'POST',
                     credentials: 'include',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'multipart/form-data',
                     },
-                    body: JSON.stringify({
-                        video: result.uri
-                    })
+                    body: formData
                 })
                 .then(res => res.json())
                 .then(dispatch({type: 'UPLOAD_VIDEO', video: result.uri}))
             }
         };
 
-    return (
-        <View>
-            <View style={Styles.profileVideoContainer}>
-                <IconButton 
-                    size={40}
-                    style={Styles.addVideoButton} 
-                    icon="video-plus" 
-                    color="white"
-                    animated='true'
-                    onPress={() => pickMovie()}
-                />
-            </View>
-            <Video
-                source={{ uri: videoUrl }}
-                rate={1.0}
-                volume={1.0}
-                isMuted={false}
-                resizeMode="cover"
-                shouldPlay
-                isLooping
-                style={{ width: 300, height: '100%' }}
-            />
-        </View>
-    )
+
+        if(!videoUrl){
+            return (
+                <View>
+                    <View style={Styles.profileVideoContainer}>
+                        <IconButton 
+                            size={40}
+                            style={Styles.addVideoButton} 
+                            icon="video-plus" 
+                            color="white"
+                            animated='true'
+                            onPress={() => pickMovie()}
+                        />
+                    </View>
+                </View>
+                   
+            )
+        }else{
+            return(
+                <View>
+                    <View style={Styles.profileVideoContainer}>
+                        <VideoComponent videoUrl={videoUrl}/>
+                    </View>
+                </View>
+            )
+        }
+
+    
 }

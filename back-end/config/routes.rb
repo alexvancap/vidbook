@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   default_url_options :host => '10.185.0.136:3000'
-  
+
   post '/login', to: 'users#login'
   post '/register', to: 'users#create'
   get '/get-user-info', to: 'users#get_user_info'

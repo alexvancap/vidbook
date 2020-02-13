@@ -106,7 +106,7 @@ export const Styles = StyleSheet.create({
     },
     profileContainerMobile: {
         backgroundColor: 'rgba(206, 206, 206, 0.42)',
-        height: 830,
+        height: 965,
         width: '100%'
 
     },
@@ -227,12 +227,13 @@ export const Styles = StyleSheet.create({
         marginLeft: 40,
     },
     profileVideoContainer: {
-        height: 350, 
+        height: 450, 
         backgroundColor: '#264C7F', 
         borderRadius: 10, 
         marginTop: 8,
         justifyContent: 'center',
         alignItems: 'center',
+        zIndex: -3
     },
     settingsCurrentInfo: {
         backgroundColor: 'red',
@@ -277,10 +278,9 @@ export const Styles = StyleSheet.create({
     },
     homeProfileCardMobile: {
         width: '100%', 
-        height: 340,
+        height: 420,
         backgroundColor: '#264C7F', 
         borderRadius: 10,
-        
     },
     homeCardHeaderContainer: {
         height: '12%',
@@ -289,7 +289,7 @@ export const Styles = StyleSheet.create({
         alignContent: 'center',
     },
     homeCardHeaderContainerMobile:{
-        height: '20%',
+        height: 70,
         backgroundColor: '#264C7F',
         flexDirection: 'row',
         alignContent: 'center',
@@ -308,7 +308,7 @@ export const Styles = StyleSheet.create({
         marginLeft: '5%',
         marginTop: '2%',
         backgroundColor: 'red',
-        borderRadius: 100,
+        borderRadius: 30,
     },
     homeCardProfileName: {
         marginLeft: 20,
