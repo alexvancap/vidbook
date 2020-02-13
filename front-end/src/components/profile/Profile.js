@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Platform } from 'react-native'
+import { IconButton } from 'react-native-paper'
 import { useDispatch, useSelector } from 'react-redux'
 import { Area, Button, ScrollView, Text, View } from '../'
 import { Styles } from '../../Styles'
@@ -15,6 +16,9 @@ export const Profile = () => {
     const [modalIsVisible, showModal] = useState(false) 
     const userInfo = useSelector(state => state.user)
     const dispatch = useDispatch()
+
+    console.log(userInfo)
+
 
     const handleShowModal = () => {
         showModal(false)
@@ -33,15 +37,30 @@ export const Profile = () => {
                 }else{
                     history.push('/login')
                 }
-            })
+            }).then(res => res.json())
+            .then(console.log)
         }
     }, [])
+
+    const deleteFile = (fileType) => {
+        fetch(`http://${HOST}:3000/delete-file`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                fileType: fileType
+            })
+        })
+        .then(dispatch({type: 'DELETE-FILE', fileType: fileType}))
+    }
 
     return(
         <ScrollView>
             <Area inline alignX="center">
                 <View style={Platform.OS === 'web' ? Styles.profileContainerWeb : Styles.profileContainerMobile}>
-                    <Header />
+                    <Header deleteFile={deleteFile}/>
                     <View style={Platform.OS === 'web' ? Styles.profileInfo : Styles.profileInfoMobile}>
                         <Text style={Styles.profileInfoHeader}>Info</Text>
                         <Text style={Styles.profileInfoTextTitle}>Introduction</Text>
@@ -69,7 +88,7 @@ export const Profile = () => {
                         <Button style={Styles.editInfoButton} color='white' onPress={() => showModal(true)} mode="outlined">Edit</Button>
                         <EditInfoModal showModal={handleShowModal} modalIsVisible={modalIsVisible}/>
                     </View>
-                    <VideoContainer user={userInfo.id}/>
+                    <VideoContainer hideAddButton={true} user={userInfo.id} videoUrl={userInfo.video_url}/>
                 </View>
             </Area>
         </ScrollView>

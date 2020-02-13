@@ -25,7 +25,7 @@ const handleSubmit = (dispatch, info) => {
                 adress: info.adress,
             })
         }).then(res => res.json())
-        .then(console.log)
+        .then(history.push('/login'))
     }else{
         dispatch({type: 'PASSWORDS_DID_NOT_MATCH'})
     }

@@ -45,7 +45,7 @@ export const Settings = () => {
             body: JSON.stringify({
                 username: information.username,
                 email: information.email,
-                address: information.address,
+                adress: information.adress,
                 password: passwords.password
             })
         })

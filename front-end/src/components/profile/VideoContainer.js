@@ -3,17 +3,16 @@ import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import React, { useEffect } from 'react';
 import { IconButton } from 'react-native-paper';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { View } from '../';
+import { VideoComponent } from '../VideoComponent';
 import { HOST } from './../../constants';
 import { Styles } from './../../Styles';
-import { VideoComponent } from '../VideoComponent'
 
 
 export const VideoContainer = (props) => {
 
     const dispatch = useDispatch()
-    const videoUrl = useSelector(state => state.user.video_url)
 
     useEffect(() => {
         getPermissionAsync();
@@ -65,7 +64,7 @@ export const VideoContainer = (props) => {
         };
 
 
-        if(!videoUrl){
+        if(!props.videoUrl && typeof props.hideAddButton !== 'undefined') {
             return (
                 <View>
                     <View style={Styles.profileVideoContainer}>
@@ -85,7 +84,14 @@ export const VideoContainer = (props) => {
             return(
                 <View>
                     <View style={Styles.profileVideoContainer}>
-                        <VideoComponent videoUrl={videoUrl}/>
+                        {!props.videoUrl && typeof props.hideAddButton === 'undefined'
+                            ?   <IconButton 
+                                    icon='video-off'
+                                    color='white'
+                                    size={140}
+                                />
+                            :   <VideoComponent videoUrl={props.videoUrl}/>
+                        }
                     </View>
                 </View>
             )

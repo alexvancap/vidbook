@@ -4,7 +4,6 @@ import { IconButton } from 'react-native-paper'
 import { Video } from 'expo-av';
 
 export const VideoComponent = (props) => {
-    console.log(props)
 
     const [videoIsPlaying, playVideo] = useState(false)     
 
@@ -21,7 +20,7 @@ export const VideoComponent = (props) => {
                 ref={ref => video = ref}
                 onPlaybackStatusUpdate=
                     {(playbackStatus) => onPlaybackStatusUpdate(playbackStatus)}
-                source={{ uri: props.videoUrl }}
+                source={props.videoUrl!== '' ? { uri: props.videoUrl } : null}
                 rate={1.0}
                 volume={1.0}
                 isMuted={false}

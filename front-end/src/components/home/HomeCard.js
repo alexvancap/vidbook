@@ -7,6 +7,7 @@ import { HOST } from './../../constants'
 import { CommentModal } from './CommentModal'
 import history from './../history'
 import { VideoComponent } from '../VideoComponent'
+import { IconButton } from 'react-native-paper'
 
 export const HomeCard = (props) => {
 
@@ -94,7 +95,13 @@ export const HomeCard = (props) => {
         }>
             <View style={Platform.OS === 'web' ? Styles.homeCardHeaderContainer : Styles.homeCardHeaderContainerMobile}>
                     {props.user.profile_url === "" 
-                        ? <View style={Platform.OS === 'web' ? Styles.homeCardProfilePicture : Styles.homeCardProfilePictureMobile}/>
+                        ? <View style={Platform.OS === 'web' ? Styles.homeCardProfilePicture : Styles.homeCardProfilePictureMobile}>
+                            <IconButton size={40}
+                                icon='emoticon-excited-outline'
+                                color='white'
+                                style={{alignSelf: 'center'}}
+                            />
+                            </View>
                         : <Image source={{uri: props.user.profile_url}} style={Platform.OS === 'web' ? Styles.homeCardProfilePicture : Styles.homeCardProfilePictureMobile} />
                     }
                 <TouchableHighlight onPress={() => history.push(`/user/${props.user.id}`)}>
@@ -125,7 +132,14 @@ export const HomeCard = (props) => {
                     {props.user.video_comments.map(comment => (
                         <View key={comment.id} style={Styles.homeCardSingleCommentContainer}>
                             {props.user.profile_url === ""
-                                ?   <View style={Styles.homeCommentsPicture} />
+                                ?   <View style={Styles.homeCommentsPicture} >
+                                        <IconButton size={40}
+                                            icon='emoticon-excited-outline'
+                                            color='white'
+                                            style={{alignSelf: 'center', marginTop: 10}}
+                                            zIndex={100}
+                                        />
+                                    </View>
                                 :   <Image source={{uri: props.user.profile_url}} style={Styles.homeCommentsPicture} />
                             }
                             <View style={Styles.homeSingleComment}>

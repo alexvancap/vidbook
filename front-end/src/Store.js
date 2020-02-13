@@ -145,6 +145,22 @@ const reducer = (currentState, action) => {
                 ...currentState,
                 viewingUser: action.info
             }
+        case 'DELETE-FILE':
+            let itemToRemove = ''
+            if(action.fileType === 'profile_pic'){
+                itemToRemove = 'profile_url'
+            }else if(action.fileType === 'header_pic'){
+                itemToRemove = 'header_url'
+            }else{
+                itemToRemove = 'video_url'
+            }
+            return{
+                ...currentState,
+                user: {
+                    ...currentState.user,
+                    [itemToRemove]: ''
+                }
+            }
         break ;
     }
     return currentState
@@ -164,10 +180,6 @@ const initialState = {
         skills: '',
         current_role: '',
         degree: '',
-        images: {
-            header: null,
-            profile: null
-        },
     },
     login: {
         username: '',

@@ -51,7 +51,14 @@ class UsersController < ApplicationController
 
     def update
         user = User.find(session[:user_id])
-        User.update(user_params)
+        User.update(
+            username: params[:username],
+            email: params[:email],
+            adress: params[:address],
+            password: params[:password]
+        )
+        
+
         render json: user
     end
 
@@ -118,5 +125,10 @@ class UsersController < ApplicationController
             school: params[:school],
             skills: params[:skills]
         })
+    end
+
+    def delete_file
+        p user = User.find(session[:user_id])
+        p user.update({params[:fileType] => nil})
     end
 end

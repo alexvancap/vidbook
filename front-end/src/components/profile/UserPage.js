@@ -72,7 +72,10 @@ export const UserPage = (props) => {
                             </View>
                         </View>
                     </View>
-                    <VideoContainer user={userInfo.id}/>
+                    {
+                        
+                    }
+                    <VideoContainer user={userInfo.id} videoUrl={userInfo.video_url}/>
                 </View>
             </Area>
         </ScrollView>

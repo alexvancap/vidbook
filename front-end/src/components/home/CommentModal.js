@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { Modal, View, Button } from './../'
 import { Styles } from './../../Styles'
 import { TextInput, Image } from 'react-native'
+import { IconButton } from 'react-native-paper'
 import { useSelector, useDispatch } from 'react-redux'
 import { HOST } from './../../constants'
 
@@ -35,7 +36,14 @@ export const CommentModal = (props) => {
             <Modal.Content >
                 <View style={Styles.homeCardSingleCommentContainer}>
                 {props.user.profile_url === "" 
-                    ? <View style={Styles.homeCommentsPicture}/>
+                    ?   <View style={Styles.homeCommentsPicture}>
+                           <IconButton size={40}
+                                icon='emoticon-excited-outline'
+                                color='white'
+                                style={{alignSelf: 'center'}}
+                                zIndex={100}
+                            />
+                        </View>
                     : <Image source={{uri: props.user.profile_url}} style={Styles.homeCommentsPicture} />
                 }
                     <View style={Styles.homeSingleComment}>

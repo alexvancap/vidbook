@@ -307,8 +307,9 @@ export const Styles = StyleSheet.create({
         width: '13%',
         marginLeft: '5%',
         marginTop: '2%',
-        backgroundColor: 'red',
+        backgroundColor: '#4C97FF',
         borderRadius: 30,
+        justifyContent: 'center'
     },
     homeCardProfileName: {
         marginLeft: 20,
@@ -385,9 +386,8 @@ export const Styles = StyleSheet.create({
         height: 55,
         width: 55,
         borderRadius: 100,
-        backgroundColor: 'red',
-        marginLeft: '1%',
-        marginBottom: 10
+        backgroundColor: '#264C7F',
+        justifyContent: 'center'
     },
     homeCardSingleCommentContainer: {
         flexDirection: 'row',

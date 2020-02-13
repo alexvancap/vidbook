@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  default_url_options :host => '10.185.0.136:3000'
+  default_url_options :host => '172.16.0.121:3000'
 
   post '/login', to: 'users#login'
   post '/register', to: 'users#create'
@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   post '/create-comment', to: 'video_comments#create'
   post '/upload-video/:id', to: 'users#upload_video'
   get '/get-specific-user/:id', to: 'users#get_specific'
+  post '/delete-file', to: 'users#delete_file'
 end
